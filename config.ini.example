@@ -1,0 +1,20 @@
+#Config for ping checker
+
+[main]
+log = pinger.log
+#File for keeping statuses
+status = /tmp/pinger-status
+
+[hosts]
+192.168.10.45  = test1 host
+10.10.90.12    = test 2 host
+
+[check]
+host_check = /bin/ping -nc1 -W5
+connectivity_check = /bin/ping -n -c1 8.8.8.8
+
+[telegram]
+chat_id = <telegram chat id>
+bot_id  = <telegram bot id>
+send_command = curl -s
+
