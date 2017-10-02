@@ -9,9 +9,8 @@ def alert (ip, status):
     txt = "{0} ({1}) - {2}".format(host[ip], ip, status)
     cmd = '{0} https://api.telegram.org/bot{1}/sendMessage -d "chat_id={2}&text={3}"'.format(
           telegram_send_command, telegram_bot_id, telegram_chat_id, txt)
-    print cmd
     logger.info('Send notification: %s (%s) - %s', host[ip], ip, status)
-#    subprocess.call(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    subprocess.call(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
  
 
 
@@ -76,7 +75,6 @@ except IOError:
 
 for ip in host_status.keys():
     try:
-        print ip, host_status[ip], last_status[ip]
         if (host_status[ip] != last_status[ip]):
            if (host_status[ip]):
               status = 'DOWN'
