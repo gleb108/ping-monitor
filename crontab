@@ -1,0 +1,2 @@
+*/1 * * * * root cd /ping-monitor && ./pinger.py
+
