@@ -4,13 +4,13 @@ MAINTAINER Gleb Galkin
 ADD crontab /etc/cron.d/pinger-cron
 
 RUN apt-get update && \
-    apt-get -y install git python cron iputils-ping && \
-    git clone https://github.com/gleb108/ping-monitor
-
-RUN /usr/bin/crontab /etc/cron.d/pinger-cron
-RUN chmod 0644 /etc/cron.d/pinger-cron
+    apt-get -y install python cron iputils-ping && \
+    mkdir ping-monitor && \
+    /usr/bin/crontab /etc/cron.d/pinger-cron && \
+    chmod 0644 /etc/cron.d/pinger-cron && \
+    touch ./ping-monitor/pinger.log
 
 ADD config.ini /ping-monitor/config.ini
-RUN touch ./ping-monitor/pinger.log
+ADD pinger.py /ping-monitor/pinger.py
 
 CMD cron && tail -f /ping-monitor/pinger.log
